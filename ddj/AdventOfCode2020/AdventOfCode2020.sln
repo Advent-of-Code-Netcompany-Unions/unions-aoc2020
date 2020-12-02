@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1. December", "1. December\1. December.csproj", "{2E5A0B67-1D8A-4691-88E9-2EFCCCB2612C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AoCLib", "AoCLib\AoCLib.csproj", "{3509026B-2229-4F3A-B824-28F0D6E11CA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AoCLib", "AoCLib\AoCLib.csproj", "{3509026B-2229-4F3A-B824-28F0D6E11CA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2. December", "2. December\2. December.csproj", "{866EFD2B-D524-493A-AE3F-5D301E50A4CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3509026B-2229-4F3A-B824-28F0D6E11CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3509026B-2229-4F3A-B824-28F0D6E11CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3509026B-2229-4F3A-B824-28F0D6E11CA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{866EFD2B-D524-493A-AE3F-5D301E50A4CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{866EFD2B-D524-493A-AE3F-5D301E50A4CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{866EFD2B-D524-493A-AE3F-5D301E50A4CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{866EFD2B-D524-493A-AE3F-5D301E50A4CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
