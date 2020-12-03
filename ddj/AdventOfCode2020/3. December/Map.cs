@@ -5,13 +5,14 @@ namespace _3._December
 {
     class Map
     {
-        private int Height;
-        private int Width;
-        private char[][] data;
+        private readonly int Height;
+        private readonly int Width;
+        private readonly char[][] data;
+
         public Map(IEnumerable<string> input)
         {
             Height = input.Count();
-            Width = input.FirstOrDefault().Count();
+            Width = input.FirstOrDefault().Length;
             data = input.Select(s => s.ToCharArray()).ToArray();
         }
 
