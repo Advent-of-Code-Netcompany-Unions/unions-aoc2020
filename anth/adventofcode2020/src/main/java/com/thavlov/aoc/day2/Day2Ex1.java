@@ -15,7 +15,7 @@ public class Day2Ex1 {
         URL url = Day2Ex1.class.getClassLoader().getResource("./day2/input.txt");
         Path path = Paths.get(url.toURI());
 
-        lines = Files.lines(path).collect(Collectors.toList());;
+        lines = Files.lines(path).collect(Collectors.toList());
     }
 
     public static String solve() throws Exception {
