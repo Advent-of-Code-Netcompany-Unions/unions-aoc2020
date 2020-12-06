@@ -25,6 +25,25 @@ namespace AoCLib
             return (await ReadStrings(filename)).Select(int.Parse);
         }
 
+        public static async Task<IEnumerable<IEnumerable<string>>> GetStringsGroupedByEmptyLine(string filename)
+        {
+            var lines = await ReadStrings(filename);
+            var current = new List<string>();
+            var res = new List<IEnumerable<string>>() { current };            
 
+            foreach (var line in lines)
+            {
+                if (line == string.Empty)
+                {
+                    current = new List<string>();
+                    res.Add(current);
+                    continue;
+                }
+
+                current.Add(line);
+            }
+
+            return res;
+        }
     }
 }

@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2. December", "2. December\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3. December", "3. December\3. December.csproj", "{F168B10E-8E07-444E-BB3D-424ADEC6FC94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4. December", "4. December\4. December.csproj", "{28F5A570-BD53-41C4-B0C5-8215795F7E11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4. December", "4. December\4. December.csproj", "{28F5A570-BD53-41C4-B0C5-8215795F7E11}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5. December", "5. December\5. December.csproj", "{7198F43F-94C3-4ADC-85C5-CFA4ACD53983}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6. December", "6. December\6. December.csproj", "{8175CA71-7556-48B2-8CFB-E9569B7BC4F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{28F5A570-BD53-41C4-B0C5-8215795F7E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28F5A570-BD53-41C4-B0C5-8215795F7E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28F5A570-BD53-41C4-B0C5-8215795F7E11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7198F43F-94C3-4ADC-85C5-CFA4ACD53983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7198F43F-94C3-4ADC-85C5-CFA4ACD53983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7198F43F-94C3-4ADC-85C5-CFA4ACD53983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7198F43F-94C3-4ADC-85C5-CFA4ACD53983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8175CA71-7556-48B2-8CFB-E9569B7BC4F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8175CA71-7556-48B2-8CFB-E9569B7BC4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8175CA71-7556-48B2-8CFB-E9569B7BC4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8175CA71-7556-48B2-8CFB-E9569B7BC4F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,27 +13,25 @@ namespace _4._December
         static async Task Main(string[] args)
         {
             var filename = InputHelper.GetFilename(args);
-            var input = (await InputHelper.ReadStrings(filename)).ToList();
-                        
-            var current = new Dictionary<string, string>();
-            var credentials = new List<Dictionary<string, string>>() { current };
+            var inputGroups = await InputHelper.GetStringsGroupedByEmptyLine(filename);
 
-            foreach(var line in input)
+            var credentials = new List<Dictionary<string, string>>();
+
+            foreach(var group in inputGroups)
             {
-                if(line == string.Empty)
-                {
-                    current = new Dictionary<string, string>();
-                    credentials.Add(current);
-                }
-                else
-                {
+                var current = new Dictionary<string, string>();
+
+                foreach(var line in group)
+                { 
                     var pairs = line.Split(" ");
                     foreach(var p in pairs)
                     {
                         var data = p.Split(":");
                         current.Add(data[0], data[1]);
                     }
-                }                
+                }
+
+                credentials.Add(current);
             }
 
             var fullCredentials = credentials.Where(c => reqProperties.All(p => c.Keys.Contains(p)));
