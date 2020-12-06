@@ -15,7 +15,6 @@ end
 
 function validate_iyr(iyr::SubString{String})::Bool
     issue_year = parse(Int, iyr)
-    @show issue_year, issue_year >= 2010 && issue_year <= 2020
     return issue_year >= 2010 && issue_year <= 2020
 end
 
@@ -52,33 +51,13 @@ function validate_pid(pid::SubString{String})::Bool
 end
 
 function has_valid_required_fields(passport::Dict)::Bool
-   for (key, value) ∈ passport
-        is_valid = false
-        
-        if (key == "byr")
-            is_valid = validate_byr(value)
-        elseif (key == "ecl")
-            is_valid = validate_ecl(value)
-        elseif (key == "eyr")
-            is_valid = validate_eyr(value)
-        elseif (key == "hcl")
-            is_valid = validate_hcl(value)
-        elseif (key == "hgt")
-            is_valid = validate_hgt(value)
-        elseif (key == "iyr")
-            is_valid = validate_iyr(value)
-        elseif (key == "pid")
-            is_valid = validate_pid(value)
-        elseif (key == "cid")
-            is_valid = true
-        end
-
-        if (!is_valid)
-            return false
-        end
-   end
-
-   return true
+   return validate_byr(passport["byr"]) && 
+        validate_ecl(passport["ecl"]) && 
+        validate_eyr(passport["eyr"]) && 
+        validate_hcl(passport["hcl"]) && 
+        validate_hgt(passport["hgt"]) && 
+        validate_iyr(passport["iyr"]) && 
+        validate_pid(passport["pid"])
 end
 
 function has_required_fields(passport::Dict)::Bool
@@ -123,4 +102,4 @@ function find_valid_passports()
     return valid_passports
 end
 
-@show find_valid_passports()
+@btime find_valid_passports()
