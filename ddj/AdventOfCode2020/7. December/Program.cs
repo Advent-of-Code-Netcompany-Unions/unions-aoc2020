@@ -1,4 +1,5 @@
 ﻿using AoCLib;
+using AoCLib.DAG;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,81 +13,52 @@ namespace _7._December
         {
             var filename = InputHelper.GetFilename(args);
             var input = await InputHelper.ReadStrings(filename);
+            
+            var processedInput = PreprocessInput(input);
+            var graph = BuildGraph(processedInput);
 
-            var bagtypes = new Dictionary<string, List<(string, int)>>();
+            //A node is connected to itself, so exclude shiny gold itself from the count
+            var res1 = graph.Nodes.Where(n => n.IsConnectedTo("shiny gold")).Count() - 1;
+            Console.WriteLine($"Res 1: {res1}"); 
 
-            foreach (var bagString in input.Select(s => s.Replace("bags", "bag").Replace("bag", "").Replace(".", "")))
+            //Brute-force approach to computing the smallest bags first
+            while (graph.Nodes.Any(n => n.Value == null))
             {
-                var bag = ParseBag(bagString);
-                bagtypes.Add(bag.Item1, bag.Item2);
+                graph.Nodes.First(n => !n.Value.HasValue && n.CanComputeNumBags()).ComputeNumBags();
             }
 
-            var expandedBagTypes = new Dictionary<string, HashSet<string>>();
-
-            foreach(var bag in bagtypes)
-            {
-                var visitedBags = new List<string>();
-                var toVisit = new Queue<string>(bag.Value.Select(bagtype => bagtype.Item1));
-                var expanded = new HashSet<string>();
-                var bagCount = 0;
-
-                while(toVisit.Count != 0)
-                {
-                    var bagtype = toVisit.Dequeue();
-                    visitedBags.Add(bagtype);
-                    if (!expanded.Contains(bagtype))
-                    {
-                        expanded.Add(bagtype);
-                        bagCount++;
-                    }
-
-                    if(expandedBagTypes.ContainsKey(bagtype))
-                    {
-                        expanded.UnionWith(expandedBagTypes[bagtype]);                        
-                        continue;
-                    }
-
-                    var found = bagtypes[bagtype].Select(inf => inf.Item1);
-                    expanded.UnionWith(found);
-
-                    foreach(var foundBagtype in found)
-                    {
-                        if(!toVisit.Contains(foundBagtype) && !visitedBags.Contains(foundBagtype))
-                        {
-                            toVisit.Enqueue(foundBagtype);
-                        }
-                    }
-                }
-
-                expandedBagTypes.Add(bag.Key, expanded);
-            }
-
-            var count = expandedBagTypes.Count(i => i.Value.Contains("shiny gold"));
-            Console.WriteLine($"Res 1: {count}");                        
-
-            count = visitBag(("shiny gold", 1), bagtypes);
-            Console.WriteLine($"Res 2: {count - 1}");
+            //The value of a node is the total number of bags including itself, but again we don't want to count the bag.
+            var res2 = graph.Nodes.First(n => n.Name == "shiny gold").Value - 1;
+            Console.WriteLine($"Res 2: {res2}");
         }
 
-        private static int visitBag(ValueTuple<string, int> bag, Dictionary<string, List<(string, int)>> bagtypes)
+        private static IEnumerable<string> PreprocessInput(IEnumerable<string> input)
         {
-            var c = 1;
-            foreach(var b in bagtypes[bag.Item1])
-            {
-                c += b.Item2 * visitBag(b, bagtypes);
-            }
-
-            return c;
+            //Remove "bags", "bag" and "." from input since they carry no relevant info
+            return input.Select(s => s.Replace("bags", "bag").Replace("bag", "").Replace(".", ""));
         }
 
-        private static (string, List<(string, int)>) ParseBag(string input)
+        private static DirectedAcyclicGraph<BagNode, long?> BuildGraph(IEnumerable<string> input)
+        {
+            var bags = input.Select(ParseBag).ToDictionary(b => b.Type);
+            var bagNodes = bags.Select(bag => new BagNode(bag.Value.Type)).ToDictionary(b => b.Name);
+            foreach(var node in bagNodes.Values)
+            {
+                var bagsInside = bags[node.Name].BagsInside;
+                node.Connections.UnionWith(bagsInside.Select(b => new GraphEdge<long?> { From = node, To = bagNodes[b.Type], Cost = b.Count }));
+            }
+
+            return new DirectedAcyclicGraph<BagNode, long?>(bagNodes.Values);
+        }
+
+        private static (string Type, List<(string Type, int Count)> BagsInside) ParseBag(string input)
         {
             var parts = input.Split("contain");
             var bagName = parts[0].Trim();
             var canContain = new List<(string, int)>();
-            var containParts = parts[1].Replace(".", "").Split(",");
+            var containParts = parts[1].Split(",").Select(s => s.Trim());
 
-            foreach (var desc in containParts.Select(part => part.Trim()))
+            foreach (var desc in containParts)
             {
                 if (desc != "no other")
                 {
