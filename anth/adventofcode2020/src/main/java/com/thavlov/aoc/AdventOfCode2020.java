@@ -10,6 +10,9 @@ import com.thavlov.aoc.day4.Day4Ex1;
 import com.thavlov.aoc.day4.Day4Ex2;
 import com.thavlov.aoc.day5.Day5;
 import com.thavlov.aoc.day6.Day6;
+import com.thavlov.aoc.day7.Day7;
+import com.thavlov.aoc.day8.Day8;
+import com.thavlov.aoc.day9.Day9;
 
 public class AdventOfCode2020 {
     public static void main(String[] args) throws Exception {
@@ -34,6 +37,12 @@ public class AdventOfCode2020 {
 
         System.out.println(" > Solution 1 to day 6: " + Day6.solvePart1());
         System.out.println(" > Solution 2 to day 6: " + Day6.solvePart2());
+
+        System.out.println(" > Solution 1 to day 7: " + Day7.solvePart1());
+        System.out.println(" > Solution 2 to day 7: " + Day7.solvePart2());
+
+        System.out.println(" > Solution 1 to day 8: " + Day8.solvePart1());
+        System.out.println(" > Solution 2 to day 8: " + Day8.solvePart2());
 
         System.out.printf("Execution time: %d ms.%n", (System.currentTimeMillis() - t));
     }
