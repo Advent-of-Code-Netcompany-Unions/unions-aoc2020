@@ -19,7 +19,7 @@ public class AdventOfCode2020 {
         System.out.println("Advent of Code 2020:");
 
         long t = System.currentTimeMillis();
-
+        
         System.out.println(" > Solution 1 to day 1: " + Day1Ex1.solve());
         System.out.println(" > Solution 2 to day 1: " + Day1Ex2.solve());
 
@@ -43,6 +43,9 @@ public class AdventOfCode2020 {
 
         System.out.println(" > Solution 1 to day 8: " + Day8.solvePart1());
         System.out.println(" > Solution 2 to day 8: " + Day8.solvePart2());
+
+        System.out.println(" > Solution 1 to day 9: " + Day9.solvePart1());
+        System.out.println(" > Solution 2 to day 9: " + Day9.solvePart2());
 
         System.out.printf("Execution time: %d ms.%n", (System.currentTimeMillis() - t));
     }
