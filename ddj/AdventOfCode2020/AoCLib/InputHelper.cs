@@ -20,9 +20,9 @@ namespace AoCLib
             return await File.ReadAllLinesAsync(filename);
         }
 
-        public static async Task<IEnumerable<int>> ReadInts(string filename)
+        public static async Task<IEnumerable<long>> ReadLongs(string filename)
         {
-            return (await ReadStrings(filename)).Select(int.Parse);
+            return (await ReadStrings(filename)).Select(long.Parse);
         }
 
         public static async Task<IEnumerable<IEnumerable<string>>> GetStringsGroupedByEmptyLine(string filename)
