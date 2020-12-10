@@ -37,8 +37,7 @@ public class Day9 {
                     return Long.toString(numbers[i + preAmble]);
                 }
             }
-
-            return Integer.toString(1);
+            return "No solution found!";
         } catch (Exception e) {
             return String.format("Unknown solution due to error: %s", e.getMessage());
         }
