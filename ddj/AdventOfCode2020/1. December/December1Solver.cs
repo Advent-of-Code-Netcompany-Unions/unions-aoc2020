@@ -5,23 +5,23 @@ namespace _1._December
 {
     public class December1Solver
     {
-        private List<int?> sortedInputs { get; init; }
-        private int targetSum { get; init; }
+        private List<long?> sortedInputs { get; init; }
+        private long targetSum { get; init; }
         private int targetSetSize { get; init; }
 
-        public December1Solver(IEnumerable<int> inputs, int targetSum, int targetSetSize)
+        public December1Solver(IEnumerable<long> inputs, long targetSum, int targetSetSize)
         {
             this.targetSum = targetSum;
             this.targetSetSize = targetSetSize;
-            sortedInputs = inputs.OrderBy(n => n).Select(n => (int?)n).ToList();
+            sortedInputs = inputs.OrderBy(n => n).Select(n => (long?)n).ToList();
         }
 
-        public int? Solve()
+        public long? Solve()
         {
             return SolveRecursively(0, 0, 0);
         }
 
-        private int? SolveRecursively(int currentSum, int currentSetSize, int startIndex)
+        private long? SolveRecursively(long currentSum, int currentSetSize, int startIndex)
         {
             //Only one number missing
             if(currentSetSize + 1 == targetSetSize)

@@ -9,7 +9,7 @@ namespace _1._December
         static async Task Main(string[] args)
         {
             var filename = InputHelper.GetFilename(args);
-            var input = await InputHelper.ReadInts(filename);
+            var input = await InputHelper.ReadLongs(filename);
 
             var solver = new December1Solver(input, 2020, 2);
             var res1 = solver.Solve();
