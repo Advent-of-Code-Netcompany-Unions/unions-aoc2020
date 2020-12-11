@@ -56,4 +56,4 @@ end
 data = "resources/10122020/input.txt"
 puzzle_part = 2
 joltage_adapters = sort(parse.(Int64, readlines(data)))
-@btime charge_my_device(joltage_adapters, puzzle_part)
+@show charge_my_device(joltage_adapters, puzzle_part)
