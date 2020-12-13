@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace AoCLib
@@ -6,19 +8,25 @@ namespace AoCLib
     public abstract class ChallengeSolver
     {
         public async Task Run()
-        {
-            Console.WriteLine("Solving example...");
-            await SolveInternal("example.txt");
-            Console.WriteLine();
-            Console.WriteLine("Solving for input...");
-            await SolveInternal("input.txt");            
+        {            
+            foreach(var file in GetInputFiles())
+            {
+                Console.WriteLine($"Solving {file}...");                
+                await SolveInternal(file);                
+                
+                Console.WriteLine();
+            }           
         }
 
         private async Task SolveInternal(string filename)
         {
             try
             {
-               await Solve(filename);
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+                await Solve(filename);
+                stopwatch.Stop();
+                Console.WriteLine($"Solved in {stopwatch.ElapsedMilliseconds}");
             }
             catch (Exception ex)
             {
@@ -27,5 +35,10 @@ namespace AoCLib
         }
 
         public abstract Task Solve(string filename);
+
+        public virtual IEnumerable<string> GetInputFiles()
+        {
+            return new string[] {"example.txt", "input.txt" };
+        }
     }
 }
