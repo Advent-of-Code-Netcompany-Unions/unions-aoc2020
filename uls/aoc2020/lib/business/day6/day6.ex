@@ -2,10 +2,9 @@ defmodule Day6 do
 
   @spec run(String.t()) :: {number, number}
   def run(file) do
-    res1 = FileReaderUtility.file_to_multi_list(file) |> part1()
+    res1 = FileReaderUtility.file_to_multi_list_split_at_empty_line(file) |> part1()
     res2 = FileReaderUtility.file_to_map_list(file) |> part2()
 
-    # {res1, res2}
     {res1, res2}
   end
 
