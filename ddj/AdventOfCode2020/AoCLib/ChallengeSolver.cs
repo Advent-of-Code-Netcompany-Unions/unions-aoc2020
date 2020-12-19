@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace AoCLib
@@ -8,7 +9,9 @@ namespace AoCLib
     public abstract class ChallengeSolver
     {
         public async Task Run()
-        {            
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("en-us", false);
+
             foreach(var file in GetInputFiles())
             {
                 Console.WriteLine($"Solving {file}...");                
