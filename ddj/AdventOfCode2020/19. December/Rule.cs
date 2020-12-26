@@ -4,8 +4,8 @@ using System.Linq;
 
 class Rule
 {
-    private string StringMatch;
-    private List<List<int>> RuleMatches;
+    private readonly string StringMatch;
+    private readonly List<List<int>> RuleMatches;
 
     public Rule(string rawRuleContent)
     {       

@@ -8,14 +8,14 @@ namespace _8._December
         public long Accumulator;
         private int InstructionPointer;        
         private readonly Instruction[] Program;
-        private bool[] VisitedLines;
+        private readonly bool[] VisitedLines;
 
         public enum InstructionType {acc, jmp, nop };
 
         public class Instruction
         {
             public InstructionType InstructionType { get; set; }
-            public int? offset { get; init; }
+            public int? Offset { get; init; }
         }
         
         public BootProgram(IEnumerable<Instruction> instructions)
@@ -49,10 +49,10 @@ namespace _8._December
                     Nop();
                     return;
                 case InstructionType.acc:
-                    Acc(instr.offset.Value);
+                    Acc(instr.Offset.Value);
                     return;
                 case InstructionType.jmp:
-                    Jmp(instr.offset.Value);
+                    Jmp(instr.Offset.Value);
                     return;
             }
         }

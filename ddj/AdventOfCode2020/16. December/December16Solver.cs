@@ -59,7 +59,7 @@ namespace _16._December
 
             Console.WriteLine("My ticket:");
 
-            var departureProduct = 1l;
+            var departureProduct = 1L;
             foreach(var val in finalMap)
             {
                 var ticketVal = myTicket[val.Value];
@@ -75,7 +75,6 @@ namespace _16._December
 
             Console.WriteLine($"Res 2 answer: {departureProduct}");
             Console.WriteLine();
-
         }
 
         private (long ScanErrorRate, List<List<long>> ValidTickets) ValidateTickets(IEnumerable<IEnumerable<long>> tickets, TicketInfo info)

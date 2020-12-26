@@ -46,22 +46,27 @@ namespace AoCLib
             return res;
         }
 
-        public static async Task<char[,]> GetTwoDimensionalArray(string filename)
+        public static char[,] GetTwoDimensionalArrayFromStringList(List<string> data)
         {
-            var lines = (await ReadStrings(filename)).Select(line => line.ToCharArray()).ToArray();
-            var height = lines.Length;
-            var width = lines.First().Length;
+            var height = data.Count;
+            var width = data.First().Length;
             var res = new char[width, height];
 
-            for(var i = 0; i < height; i++)
+            for (var i = 0; i < height; i++)
             {
-                for(var j = 0; j < width; j++)
+                for (var j = 0; j < width; j++)
                 {
-                    res[j, i] = lines[i][j];
+                    res[j, i] = data[i][j];
                 }
             }
 
             return res;
+        }    
+
+        public static async Task<char[,]> GetTwoDimensionalArray(string filename)
+        {
+            var lines = (await ReadStrings(filename)).ToList();
+            return GetTwoDimensionalArrayFromStringList(lines);
         }
 
         public static async Task<char[,,]> GetThreeDimensionalArray(string filename)

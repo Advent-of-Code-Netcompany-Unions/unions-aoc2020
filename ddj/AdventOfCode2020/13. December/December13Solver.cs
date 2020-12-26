@@ -31,11 +31,11 @@ namespace _13._December
                 .Select(bus => (id: bus, dep: GetNextDeparture(bus, departure)))
                 .OrderBy(bus => bus.dep);
 
-            var myDeparture = nextDepartures.First();
-            var wait = myDeparture.dep - departure;
+            var (id, dep) = nextDepartures.First();
+            var wait = dep - departure;
 
-            Console.WriteLine($"Bus: {myDeparture.id}, Waiting time: {wait}");
-            return myDeparture.id * wait;
+            Console.WriteLine($"Bus: {id}, Waiting time: {wait}");
+            return id * wait;
         }
 
         private long GetNextDeparture(long id, long now)
@@ -52,7 +52,7 @@ namespace _13._December
                 .Split(',')
                 .Select((string id, int offset) => (id, offset))
                 .Where(entry => entry.id != "x")
-                .Select(entry => (id: long.Parse(entry.id), offset: entry.offset))                
+                .Select(entry => (id: long.Parse(entry.id), entry.offset))                
                 .ToList();
 
             // If there is a solution, it must repeat with a period shorter than the product of intervals
@@ -62,7 +62,7 @@ namespace _13._December
             var currentTime = increment + busses[0].offset; //We could start at 10^14 but that seems cheap...
             var nextBusIndex = 1;
 
-            while (currentTime < upperBound && nextBusIndex < busses.Count())
+            while (currentTime < upperBound && nextBusIndex < busses.Count)
             {
                 //Did we find a time where busses 0...i-1 aligns with bus i?
                 while ((currentTime + busses[nextBusIndex].offset) % busses[nextBusIndex].id != 0)

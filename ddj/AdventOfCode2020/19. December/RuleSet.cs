@@ -7,7 +7,7 @@ namespace _19._December
     {
         public Dictionary<int, Rule> Rules;        
 
-        public RuleSet(IEnumerable<string> rawRules, bool expandRules)
+        public RuleSet(IEnumerable<string> rawRules)
         {
             Rules = rawRules
                 .Select(r => r.Split(':').Select(s => s.Trim()).ToList())

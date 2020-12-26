@@ -12,7 +12,7 @@ namespace _12._December
         public override async Task Solve(string filename)
         {
             var input = await InputHelper.ReadStrings(filename);
-            var instructions = input.Select(l => (op: l.First(), val: int.Parse(l.Substring(1))));
+            var instructions = input.Select(l => (op: l.First(), val: int.Parse(l[1..])));
 
             Ferry = new Ferry();
 
@@ -38,16 +38,16 @@ namespace _12._December
             switch (inst.op)
             {
                 case 'N':
-                    Ferry.Move(Grid2D<int>.Direction.NORTH, inst.val);
+                    Ferry.Move(Direction.NORTH, inst.val);
                     return;
                 case 'S':
-                    Ferry.Move(Grid2D<int>.Direction.SOUTH, inst.val);
+                    Ferry.Move(Direction.SOUTH, inst.val);
                     return;
                 case 'E':
-                    Ferry.Move(Grid2D<int>.Direction.EAST, inst.val);
+                    Ferry.Move(Direction.EAST, inst.val);
                     return;
                 case 'W':
-                    Ferry.Move(Grid2D<int>.Direction.WEST, inst.val);
+                    Ferry.Move(Direction.WEST, inst.val);
                     return;
                 case 'L':
                     Ferry.Turn(-inst.val);
@@ -68,16 +68,16 @@ namespace _12._December
             switch (inst.op)
             {
                 case 'N':
-                    Ferry.MoveWaypoint(Grid2D<int>.Direction.NORTH, inst.val);
+                    Ferry.MoveWaypoint(Direction.NORTH, inst.val);
                     return;
                 case 'S':
-                    Ferry.MoveWaypoint(Grid2D<int>.Direction.SOUTH, inst.val);
+                    Ferry.MoveWaypoint(Direction.SOUTH, inst.val);
                     return;
                 case 'E':
-                    Ferry.MoveWaypoint(Grid2D<int>.Direction.EAST, inst.val);
+                    Ferry.MoveWaypoint(Direction.EAST, inst.val);
                     return;
                 case 'W':
-                    Ferry.MoveWaypoint(Grid2D<int>.Direction.WEST, inst.val);
+                    Ferry.MoveWaypoint(Direction.WEST, inst.val);
                     return;
                 case 'L':
                     Ferry.RotateWaypoint(-inst.val);

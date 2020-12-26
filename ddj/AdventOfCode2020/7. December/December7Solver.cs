@@ -62,7 +62,7 @@ namespace _7._December
                 if (desc != "no other")
                 {
                     var num = int.Parse(desc.Substring(0, 1));
-                    canContain.Add((desc.Substring(2), num));
+                    canContain.Add((desc[2..], num));
                 }
             }
 

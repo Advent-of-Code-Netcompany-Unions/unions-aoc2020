@@ -6,14 +6,14 @@ namespace _12._December
 {
     class Ferry
     {
-        public Dictionary<long, Grid2D<int>.Direction> DirectionDegreeMap = new Dictionary<long, Grid2D<int>.Direction> {
-            { 0, Grid2D<int>.Direction.EAST },
-            { 90, Grid2D<int>.Direction.SOUTH },
-            { 180, Grid2D<int>.Direction.WEST },
-            { 270, Grid2D<int>.Direction.NORTH },
-            {-270, Grid2D<int>.Direction.SOUTH },
-            {-180, Grid2D<int>.Direction.WEST },
-            {-90, Grid2D<int>.Direction.NORTH },
+        public Dictionary<long, Direction> DirectionDegreeMap = new Dictionary<long, Direction> {
+            { 0, Direction.EAST },
+            { 90, Direction.SOUTH },
+            { 180, Direction.WEST },
+            { 270, Direction.NORTH },
+            {-270, Direction.SOUTH },
+            {-180, Direction.WEST },
+            {-90, Direction.NORTH },
         };        
 
         public (long x, long y) Position { get; set; } = (0, 0);
@@ -32,20 +32,20 @@ namespace _12._December
             Facing = newDirection;
         }
 
-        public void Move(Grid2D<int>.Direction direction, int distance)
+        public void Move(Direction direction, int distance)
         {
-            var directionVector = Grid2D<int>.DirectionVectors[direction];
-            var deltaX = directionVector.deltaX * distance;
-            var deltaY = directionVector.deltaY * distance;
+            var directionVector = DirectionUtils.DirectionVectors[direction];
+            var deltaX = directionVector.DeltaX * distance;
+            var deltaY = directionVector.DeltaY * distance;
 
             Position = (Position.x + deltaX, Position.y + deltaY);
         }
 
-        public void MoveWaypoint(Grid2D<int>.Direction direction, int distance)
+        public void MoveWaypoint(Direction direction, int distance)
         {
-            var directionVector = Grid2D<int>.DirectionVectors[direction];
-            var deltaX = directionVector.deltaX * distance;
-            var deltaY = directionVector.deltaY * distance;
+            var directionVector = DirectionUtils.DirectionVectors[direction];
+            var deltaX = directionVector.DeltaX * distance;
+            var deltaY = directionVector.DeltaY * distance;
 
             Waypoint = (Waypoint.x + deltaX, Waypoint.y + deltaY);
         }

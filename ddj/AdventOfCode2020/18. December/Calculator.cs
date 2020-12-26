@@ -4,9 +4,9 @@ namespace _18._December
 {
     class Calculator
     {
-        private string Expression;
+        private readonly string Expression;
+        private readonly bool PlusHasPrecedence;
         private int Index;
-        private bool PlusHasPrecedence;
 
         public Calculator(string expr, bool plusHasPrecedence)
         {
@@ -33,15 +33,12 @@ namespace _18._December
 
         private long PerformOperation(char op, long currentVal)
         {
-            switch (op)
+            return op switch
             {
-                case '+':
-                    return PerformAddition(currentVal);
-                case '*':
-                    return PerformMultiplication(currentVal);
-                default:
-                    throw new Exception("Unknown operation: " + op);
-            }
+                '+' => PerformAddition(currentVal),
+                '*' => PerformMultiplication(currentVal),
+                _ => throw new Exception("Unknown operation: " + op),
+            };
         }
 
         private long PerformAddition(long currentVal)
@@ -78,7 +75,7 @@ namespace _18._December
                 return EvaluateParentheses();
             }
 
-            var part = Expression.Substring(Index).Split(new char[] { '*', '+', ')' })[0];
+            var part = Expression[Index..].Split(new char[] { '*', '+', ')' })[0];
             Index += part.Length;
             return long.Parse(part);
         }

@@ -15,7 +15,7 @@ namespace _19._December
             var rules = input[0];
             var strings = input[1];
 
-            var ruleSet = new RuleSet(rules, false);
+            var ruleSet = new RuleSet(rules);
             var validRules = strings.Select(ruleSet.Matches);
 
             Console.WriteLine($"Res1: {validRules.Count(b => b)}");

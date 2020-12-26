@@ -42,7 +42,7 @@ namespace _5._December
             var mySeat = -1;
             found.Sort();
 
-            while (i < found.Count())
+            while (i < found.Count)
             {
                 var cand = found[i];
                 if (found[i] - found[i - 1] == 2)

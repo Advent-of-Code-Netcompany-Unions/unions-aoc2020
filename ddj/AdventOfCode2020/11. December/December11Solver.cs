@@ -87,18 +87,18 @@ namespace _11._December
             throw new Exception("Illegal map value: " + currentVal);
         }
 
-        private int CountNearbyOccupiedSeats(int x, int y)
+        private int CountNearbyOccupiedSeats(long x, long y)
         {
-            var nearbySeatCoordinates = Grid2D<char>.DirectionVectors.Values.Select(v => (x: x + v.deltaX, y: y + v.deltaY));
+            var nearbySeatCoordinates = DirectionUtils.DirectionVectors.Values.Select(v => (X: x + v.DeltaX, Y: y + v.DeltaY));
             var validSeats = nearbySeatCoordinates.Where(CurrentGrid.IsValidCoordinate);            
-            var seatVals = validSeats.Select(pos => CurrentGrid.Contents[pos.x, pos.y]);
+            var seatVals = validSeats.Select(pos => CurrentGrid.Contents[pos.X, pos.Y]);
 
             return seatVals.Count(c => c == '#');
         }
 
         private int CountVisibleOccupiedSeats(int x, int y)        {
 
-            var visibleSeats = Grid2D<char>.DirectionVectors.Values.Select(v => Look((x, y), v));
+            var visibleSeats = DirectionUtils.DirectionVectors.Values.Select(v => Look((x, y), v));
             return visibleSeats.Count(c => c == '#');
         }
 

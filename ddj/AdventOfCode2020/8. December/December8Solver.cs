@@ -22,7 +22,7 @@ namespace _8._December
             }
 
             int i = 0;
-            while(i < instructions.Count())
+            while(i < instructions.Count)
             {
                 if(instructions[i].InstructionType != BootProgram.InstructionType.acc)
                 {
@@ -51,7 +51,7 @@ namespace _8._December
             var instr = Enum.Parse(typeof(BootProgram.InstructionType), parts[0]);
             var value = int.Parse(parts[1]);
 
-            return new BootProgram.Instruction { InstructionType = (BootProgram.InstructionType)instr, offset = value };
+            return new BootProgram.Instruction { InstructionType = (BootProgram.InstructionType)instr, Offset = value };
         }
 
         private BootProgram.Instruction ModifyInstruction(BootProgram.Instruction instr)
@@ -59,11 +59,11 @@ namespace _8._December
             var newInstr = instr;
             if(instr.InstructionType == BootProgram.InstructionType.jmp)
             {
-                newInstr = new BootProgram.Instruction { InstructionType = BootProgram.InstructionType.nop, offset = instr.offset };
+                newInstr = new BootProgram.Instruction { InstructionType = BootProgram.InstructionType.nop, Offset = instr.Offset };
             }
             else if(instr.InstructionType == BootProgram.InstructionType.nop)
             {
-                newInstr = new BootProgram.Instruction { InstructionType = BootProgram.InstructionType.jmp, offset = instr.offset };
+                newInstr = new BootProgram.Instruction { InstructionType = BootProgram.InstructionType.jmp, Offset = instr.Offset };
             }
 
             return newInstr;

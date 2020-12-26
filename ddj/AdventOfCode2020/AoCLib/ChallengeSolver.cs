@@ -29,7 +29,7 @@ namespace AoCLib
                 stopwatch.Start();
                 await Solve(filename);
                 stopwatch.Stop();
-                Console.WriteLine($"Solved in {stopwatch.ElapsedMilliseconds}");
+                Console.WriteLine($"Solved in {stopwatch.ElapsedMilliseconds} ms");
             }
             catch (Exception ex)
             {
@@ -41,7 +41,10 @@ namespace AoCLib
 
         public virtual IEnumerable<string> GetInputFiles()
         {
+#if DEBUG
             return new string[] {"example.txt", "input.txt" };
+#endif
+            return new string[] { "input.txt" };
         }
     }
 }

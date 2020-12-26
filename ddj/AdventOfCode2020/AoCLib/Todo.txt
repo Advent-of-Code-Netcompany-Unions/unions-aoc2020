@@ -1,0 +1,2 @@
+﻿Non-useless 2D Array representation - [,] is baad
+Set product with generic combinator

@@ -30,8 +30,10 @@ namespace _10._December
             Console.WriteLine($"Res1: {diffs[1] * diffs[3]}");
 
             var descendingAdapters = input.Reverse().Append(0L);
-            var connectionCounts = new Dictionary<long, long>();
-            connectionCounts[descendingAdapters.First()] = 1L; //Device can only be connected to last adapter
+            var connectionCounts = new Dictionary<long, long>
+            {
+                [descendingAdapters.First()] = 1L //Device can only be connected to last adapter
+            };
             foreach (var adapter in descendingAdapters.Skip(1))
             {
                 var options = connectionCounts.Where(pair => adapter + 3 >= pair.Key).Select(pair => pair.Value).Sum();
