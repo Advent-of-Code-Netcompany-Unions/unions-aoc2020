@@ -9,6 +9,7 @@ fn main() {
     total_ms += timed(aoc::t02::run, "02");
     total_ms += timed(aoc::t03::run, "03");
     total_ms += timed(aoc::t04::run, "04");
+    total_ms += timed(aoc::t05::run, "05");
 
     println!();
     println!("> Time for all tasks: {} milliseconds", total_ms)
