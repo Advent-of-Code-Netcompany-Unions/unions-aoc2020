@@ -1,6 +1,6 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 
-pub fn timed(text: &str, f: fn(&str), input: &str) -> u128 {
+pub fn timed(f: fn(&str), input: &str) -> u128 {
     println!("---------------");
     let since_the_epoch = SystemTime::now()
         .duration_since(UNIX_EPOCH)
@@ -16,7 +16,7 @@ pub fn timed(text: &str, f: fn(&str), input: &str) -> u128 {
         .as_millis()
         - in_ms;
 
-    println!("{}: {:?} milliseconds", text, elapsed_time);
+    println!("AoC {}: {:?} milliseconds", input, elapsed_time);
 
     elapsed_time
 }
