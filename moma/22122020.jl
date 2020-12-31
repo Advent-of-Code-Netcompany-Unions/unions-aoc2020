@@ -90,8 +90,9 @@ function all_hail_the_crabigator(input::String, puzzle_part::Int)::Int
     end
 end
 
-# data = "resources/22122020/test.txt"
-data = "resources/22122020/input.txt"
+curr_day = string(split(split(@__FILE__, "/")[end], ".jl"; keepempty=false)[1])
+# data = "$(@__DIR__)/resources/$curr_day/test.txt"
+data = "$(@__DIR__)/resources/$curr_day/input.txt"
 
 str = read(open(data), String)
 puzzle_part = 2

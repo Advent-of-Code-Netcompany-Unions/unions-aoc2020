@@ -68,10 +68,9 @@ function stuff(validation_rules::Array{Validation, 1}, own_ticket::Array{Integer
     tickets, fields_per_ticket = size(valid_nearby_tickets)
     rules = size(validation_rules, 1)
 
-    validation_array = zeros(Integer, rules, fields_per_ticket)
+    validation_array = zeros(Int, rules, fields_per_ticket)
     field_to_rule = repeat(validation_rules)
     for (ticket_idx, ticket) ∈ enumerate(eachrow(valid_nearby_tickets))
-        # validation_array = falses(rules, fields_per_ticket)
         for (rule_idx, validation_rule) ∈ enumerate(validation_rules)
             rule_a = validation_rule.rule_a.lower_bound .<= ticket .<= validation_rule.rule_a.upper_bound
             rule_b = validation_rule.rule_b.lower_bound .<= ticket .<= validation_rule.rule_b.upper_bound
@@ -79,17 +78,6 @@ function stuff(validation_rules::Array{Validation, 1}, own_ticket::Array{Integer
         end
     end
 
-
-    # s = sum(t; dims=2)
-    # sorted_rules = Array{Tuple{String, Integer, BitArray{1}}, 1}()
-
-
-    # show(stdout, MIME"text/plain"(), validation_rules)
-    # println()
-    # show(stdout, MIME"text/plain"(), validation_array)
-    # println()
-
-    rule_indices = falses(rules, fields_per_ticket)
     valid_rules_for_field = zeros(Integer, fields_per_ticket)
     valid_fields_for_rule = zeros(Integer, rules)
     for (idx, col) in enumerate(eachcol(validation_array))
@@ -99,43 +87,15 @@ function stuff(validation_rules::Array{Validation, 1}, own_ticket::Array{Integer
         valid_fields_for_rule[idx] = sum(row .== tickets)
     end
 
-
-
-    # valid_rules_for_field = sum(rule_indices; dims=1)
-
-    # FIXME: fix rule/field sorting
     field_order = sortperm(valid_rules_for_field; rev=true)
-    rule_order = sortperm(valid_fields_for_rule; rev=true)
+    rule_order = sortperm(valid_fields_for_rule; rev=false)
 
-    @show field_order
-    @show rule_order
-    # show(stdout, MIME"text/plain"(), validation_rules[rule_order])
-    sorted_fields = own_ticket[field_order]
-    sorted_rules = validation_rules[rule_order]
     ticket_value = 1
-    for (rule_idx, rule) ∈ enumerate(sorted_rules)
+    for (rule_idx, rule) ∈ enumerate(validation_rules[rule_order])
         if (startswith(rule.name, "departure"))
-            # @show rule.name, rule_idx
-            @show rule_idx
-            @show own_ticket[rule_idx]
-            ticket_value *= own_ticket[rule_idx]
+            ticket_value *= own_ticket[field_order][rule_idx]
         end
     end
-
-    # show(stdout, MIME"text/plain"(), rule_indices)
-    # println()
-    # show(stdout, MIME"text/plain"(), valid_rules_for_field)
-    # println()
-    # @show tickets
-
-    # rule_to_field = Dict{Integer, Integer}()
-    # cnt = 0
-    # remaining_rules = 20
-    # while (true && cnt <= 100)
-
-        
-    #     cnt += 1
-    # end
 
     return ticket_value
 end
@@ -152,11 +112,16 @@ function hack_the_foreign_language(input::Array{SubString{String}}, puzzle_part:
     
 end
 
-# data = "resources/16122020/testa.txt"
-# data = "resources/16122020/testb.txt"
-data = "resources/16122020/input.txt"
+function main()
+    curr_day = string(split(split(@__FILE__, "/")[end], ".jl"; keepempty=false)[1])
+    # data = "$(@__DIR__)/resources/$curr_day/testa.txt"
+    # data = "$(@__DIR__)/resources/$curr_day/testb.txt"
+    data = "$(@__DIR__)/resources/$curr_day/input.txt"
 
-puzzle_part = 2
-data_input = split(read(data, String), "\n\n")
+    puzzle_part = 2
+    data_input = split(read(data, String), "\n\n")
 
-@show hack_the_foreign_language(data_input, puzzle_part)
+    @show hack_the_foreign_language(data_input, puzzle_part)
+end
+
+main()
