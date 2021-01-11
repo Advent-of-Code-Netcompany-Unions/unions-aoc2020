@@ -82,7 +82,6 @@ pub fn run(path: &str) {
 
     let mut my_seat = 0;
     for seat in seats {
-        //println!("{}", seat.seat_id());
         let next_seat = seat.seat_id();
         if (next_seat - 2) == prev_seat_id {
             my_seat = prev_seat_id + 1;
